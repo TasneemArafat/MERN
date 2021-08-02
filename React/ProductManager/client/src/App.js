@@ -1,9 +1,14 @@
 import './App.css';
-import Form from './components/Form';
+import Main from './components/Main';
+import ProductDetail from './components/ProductDetail';
+import {Router} from '@reach/router';
 function App() {
   return (
     <div className="App">
-      <Form></Form>
+      <Router>
+      <Main path="products/"></Main>
+      <ProductDetail path="products/:id"></ProductDetail>
+      </Router>
     </div>
   );
 }

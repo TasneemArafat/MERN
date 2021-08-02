@@ -8,7 +8,7 @@ const Form = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        axios.post('http://localhost:8000/api/products', {
+        axios.post('http://localhost:8000/api/products/new', {
             title,
             price,
             description
