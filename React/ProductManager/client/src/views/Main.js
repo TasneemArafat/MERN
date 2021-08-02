@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react'
-import Form from './Form'
-import Display from './Display'
+import Form from '../components/Form'
+import Display from '../components/Display'
 import axios from 'axios'
 
 const Main = () => {
@@ -16,11 +16,16 @@ const Main = () => {
             });
     },[])
 
+    const removeFromDB = productID => {
+        setProducts(products.filter(product => product._id != productID))
+
+    }
+
     return (
         <div>
             <Form/>
             <hr/>
-            {loaded && <Display productsList={products}/>}
+            {loaded && <Display productsList={products} removeFromDB = {removeFromDB}/>}
         </div>
     )
 }

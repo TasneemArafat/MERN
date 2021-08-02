@@ -1,6 +1,7 @@
 import './App.css';
-import Main from './components/Main';
-import ProductDetail from './components/ProductDetail';
+import Main from './views/Main';
+import ProductDetail from './views/ProductDetail';
+import Update from './views/Update';
 import {Router} from '@reach/router';
 function App() {
   return (
@@ -8,6 +9,7 @@ function App() {
       <Router>
       <Main path="products/"></Main>
       <ProductDetail path="products/:id"></ProductDetail>
+      <Update path="products/:id/edit"></Update>
       </Router>
     </div>
   );
