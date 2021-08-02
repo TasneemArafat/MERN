@@ -1,22 +1,29 @@
-import React from 'react'
-import { Link } from '@reach/router';
-import axios from 'axios'
+import React, {useState, useEffect} from 'react'
+import { Link, navigate } from '@reach/router';
+import axios from 'axios';
+import Delete from './Delete';
 
 const Display = (props) => {
+    const [products, setProducts] = useState([])
+    useEffect(()=>{
+        axios.get('http://localhost:8000/api/products')
+            .then(res=>{
+                setProducts(res.data.products);
+            });
+    },[products])
 
-    const clickHandler = productId => {
-        axios.delete('http://localhost:8000/api/products/'+productId)
-        .then(res => {
-            props.removeFromDB(productId);
-        })
+    const removeFromDB = productID => {
+        setProducts(products.filter(product => product._id != productID))
+
     }
 
     return (
         <div>
-            {props.productsList.map((item,i) => {
+            {products.map((item,i) => {
             return <div>
             <Link to ={item._id}>{item.title}</Link>
-            <button onClick={e => {clickHandler(item._id)}}>Delete</button>
+            <div><Link to ={"/products/" + item._id + "/edit"}>Edit</Link></div>
+            <Delete id={item._id} successfullDelete={() => removeFromDB(item._id)}></Delete>
             </div>})}
         </div>
     )

@@ -16,6 +16,13 @@ const Main = () => {
             });
     },[])
 
+    const createProduct = (product) => {
+        axios.post('http://localhost:8000/api/products/new', product)
+        .then(res => {
+            setProducts([...products,res.data.product]);
+        })
+    }
+
     const removeFromDB = productID => {
         setProducts(products.filter(product => product._id != productID))
 
@@ -23,7 +30,7 @@ const Main = () => {
 
     return (
         <div>
-            <Form/>
+            <Form initialTitle="" initialPrice="" initialDescription="" actionProps={createProduct}/>
             <hr/>
             {loaded && <Display productsList={products} removeFromDB = {removeFromDB}/>}
         </div>

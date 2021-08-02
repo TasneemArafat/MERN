@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import axios from 'axios'
-import {Link} from '@reach/router'
+import {Link, navigate} from '@reach/router'
+import Delete from '../components/Delete'
 
 const ProductDetail = (props) => {
     const [product, setProduct] = useState({})
@@ -14,13 +15,14 @@ const ProductDetail = (props) => {
         });
         },[])
 
-        
+                
     return (
         <div>
             <h1>{product.title}</h1>
             <p>Price: {product.price} $</p>
             <p>Description: {product.description}</p>
             <div><Link to={"/products/" + product._id + "/edit"}>Edit</Link></div>
+            <Delete id={product._id} successfullDelete={() => navigate("/products")}></Delete>
         </div>
     )
 }
